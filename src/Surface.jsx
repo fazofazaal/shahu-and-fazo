@@ -43,10 +43,10 @@ function Palette({ onNavigate }) {
   return (
     <div className="flex flex-col items-center justify-between flex-1 min-w-full py-6 bg-white">
       <div className="flex flex-col space-y-4">
-        <Color value="#99A19C" />
-        <Color value="#C1CDC3" />
-        <Color value="#B49AAC" />
-        <Color value="#D3C4CB" />
+        <Color value="#D1B3C9" />
+        <Color value="#b3809a" />
+        <Color value="#BBBAA0" />
+        <Color value="#969D80" />
       </div>
       <button onClick={onNavigate}>Back</button>
       <Footer />
