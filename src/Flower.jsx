@@ -5,7 +5,7 @@ import * as THREE from 'three';
 
 export default function Banana({ z, scale }) {
   const ref = useRef();
-  const { nodes, materials } = useGLTF('/dead_rose-transformed.glb');
+  const { nodes, materials } = useGLTF('/flower-transformed.glb');
 
   const { viewport, camera } = useThree();
   const { width, height } = viewport.getCurrentViewport(camera, [0, 0, z]);
@@ -34,9 +34,9 @@ export default function Banana({ z, scale }) {
     <mesh
       ref={ref}
       scale={scale}
-      geometry={nodes['dead-rose'].geometry}
-      material={materials.texture}
-      material-emissive="brown"
+      geometry={nodes.flower.geometry}
+      material={materials.skin}
+      material-emissive="#B3809A"
     />
   );
 }

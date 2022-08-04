@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import Navbar from './Navbar';
+import DiamondArrow from './DiamondArrow';
 
 export default function Surface() {
   const [showPalette, setShowPalette] = useState(false);
 
   return (
-    <div className="absolute z-10 flex flex-col items-center justify-between min-w-full min-h-screen px-12 py-16 bg-yellow-[C1CDC3] bg-opacity-20 bg-blend-color backdrop-filter">
+    <div className="absolute z-10 flex flex-col items-center justify-between min-w-full min-h-screen px-12 py-16 bg-[#C1CDC3] bg-opacity-0 bg-blend-color backdrop-filter font-galins">
       {showPalette ? (
         <Palette onNavigate={() => setShowPalette(false)} />
       ) : (
@@ -25,14 +26,17 @@ function Countdown({ onNavigate }) {
   return (
     <div className="flex flex-col items-center justify-between flex-1 min-w-full py-6 ">
       <div className="flex flex-col items-center mt-12">
-        <h1 className="text-9xl">{daysTillNov4()}</h1>
-        <h5 className="text-6xl">Days</h5>
+        <h1 className="text-9xl text-[#333745]">{daysTillNov4()}</h1>
+        <h5 className="text-6xl text-[#333745]">Days</h5>
       </div>
       <button
-        className="cursor-pointer hover:font-medium animate-pulse"
+        className="cursor-pointer hover:font-medium animate-pulse text-[#333745]"
         onClick={onNavigate}
       >
-        View Color Palette ⟶
+        <div className="flex items-center justify-between space-x-2">
+          <span>View Color Palette</span>
+          <DiamondArrow />
+        </div>
       </button>
       <Footer />
     </div>
@@ -41,14 +45,24 @@ function Countdown({ onNavigate }) {
 
 function Palette({ onNavigate }) {
   return (
-    <div className="flex flex-col items-center justify-between flex-1 min-w-full py-6 bg-white">
+    <div className="flex flex-col items-center justify-between flex-1 min-w-full py-6">
       <div className="flex flex-col space-y-4">
         <Color value="#D1B3C9" />
         <Color value="#b3809a" />
         <Color value="#BBBAA0" />
         <Color value="#969D80" />
       </div>
-      <button onClick={onNavigate}>Back</button>
+      <button
+        onClick={onNavigate}
+        className="cursor-pointer hover:font-medium animate-pulse text-[#333745]"
+      >
+        <div className="flex items-center justify-between space-x-2">
+          <span className="-rotate-180">
+            <DiamondArrow />
+          </span>
+          <span>Back</span>
+        </div>
+      </button>
       <Footer />
     </div>
   );
@@ -57,14 +71,18 @@ function Palette({ onNavigate }) {
 const Logo = () => <div className="text-xl font-semibold">Shahu & Fazo</div>;
 
 const Color = ({ value }) => (
-  <svg height="100" width="100">
+  <svg
+    height="100"
+    width="100"
+    className="transition-all duration-700 ease-in-out transform scale-100 cursor-pointer hover:scale-125"
+  >
     <circle cx="50" cy="50" r="40" fill={value} />
   </svg>
 );
 
 const Footer = () => (
-  <div className="flex flex-col items-center space-y-2">
+  <div className="flex flex-col items-center space-y-2 text-[#333745]">
     <Logo />
-    <h6 className="text-md">04/11/2022</h6>
+    <h6 className="text-md text-[#333745]">04/11/2022</h6>
   </div>
 );

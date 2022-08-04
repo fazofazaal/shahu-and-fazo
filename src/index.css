@@ -2,7 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body, #root {
+@font-face {
+  font-family: 'Galins';
+  src: url('/fonts/Galins-Regular.otf');
+}
+
+html,
+body,
+#root {
   padding: 0;
   margin: 0;
   width: 100%;
@@ -13,5 +20,3 @@ html, body, #root {
 #root {
   position: relative;
 }
-
-
