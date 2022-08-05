@@ -51,7 +51,7 @@ function Countdown({ onNavigate }) {
 const PaletteGirls = () => (
   <div className="flex flex-col items-center justify-center flex-1 space-y-0 lg:space-y-2">
     <Color value="#D1B3C9" />
-    <Color value="#b3809a" />
+    <Color value="#B3809A" />
     <Color value="#BBBAA0" />
     <Color value="#969D80" />
   </div>
@@ -60,7 +60,7 @@ const PaletteGirls = () => (
 const PaletteBoys = () => (
   <div className="flex flex-col items-center justify-center flex-1 space-y-0 lg:space-y-2">
     <Color value="#FBFBFA" />
-    <Color value="#8A90A8" />
+    <Color value="#A3A3A3" />
   </div>
 );
 
