@@ -1,18 +1,46 @@
-import { Link, Route, useRoute } from 'wouter';
+import { Link, Route, useRoute, useLocation, useRouter } from 'wouter';
 import {
   GenderFemale,
   ArrowRight,
   GenderMale,
   ArrowLeft,
 } from 'phosphor-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { memo } from 'react';
+
+const AnimationSettings = {
+  transition: { duration: 1 },
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -8 },
+};
+
+const routes = {
+  '/': Countdown,
+  '/palettes/feminine': Palette,
+  '/palettes/masculine': Palette,
+};
 
 export default function Surface() {
+  useRouter();
+  const [location] = useLocation();
+  const Route = routes[location];
+
   return (
-    <div className="absolute z-10 flex flex-col items-center justify-between min-w-full min-h-full px-12 py-8 md:py-36 lg:py-16 bg-[#C1CDC3] bg-opacity-0 bg-blend-color backdrop-filter font-galins">
-      <Route path="/" component={Countdown} />
-      <Route path="/palettes/feminine" component={Palette} />
-      <Route path="/palettes/masculine" component={Palette} />
-    </div>
+    <AnimatePresence initial={false}>
+      <motion.div
+        className="absolute z-10 flex flex-col items-center justify-between min-w-full min-h-full px-12 py-8 md:py-36 lg:py-16 bg-[#C1CDC3] bg-opacity-0 bg-blend-color backdrop-filter font-galins"
+        key={location}
+        {...AnimationSettings}
+      >
+        <Route />
+      </motion.div>
+    </AnimatePresence>
+    // <div className="absolute z-10 flex flex-col items-center justify-between min-w-full min-h-full px-12 py-8 md:py-36 lg:py-16 bg-[#C1CDC3] bg-opacity-0 bg-blend-color backdrop-filter font-galins">
+    //   <Route path="/" component={Countdown} />
+    //   <Route path="/palettes/feminine" component={Palette} />
+    //   <Route path="/palettes/masculine" component={Palette} />
+    // </div>
   );
 }
 
@@ -32,8 +60,8 @@ function Countdown() {
       <Link href="/palettes/feminine">
         <a className="cursor-pointer hover:font-medium animate-pulse text-[#333745]">
           <div className="flex items-center justify-between space-x-2">
-            <span>View Color Palette</span>
-            <ArrowRight size={24} color="#3e3e3d" />
+            <span>Color Palette</span>
+            <ArrowRight size={20} color="#3e3e3d" />
           </div>
         </a>
       </Link>
@@ -42,13 +70,36 @@ function Countdown() {
   );
 }
 
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      delay: 0.5,
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -16 },
+};
+
 const PaletteGirls = () => (
-  <div className="flex flex-col items-center justify-center flex-1 space-y-0 lg:space-y-2">
+  <motion.ol
+    variants={container}
+    initial="hidden"
+    animate="show"
+    exit="exit"
+    className="flex flex-col items-center justify-center flex-1 space-y-0 lg:space-y-2"
+  >
     <Color value="#D1B3C9" />
     <Color value="#B3809A" />
     <Color value="#BBBAA0" />
     <Color value="#969D80" />
-  </div>
+  </motion.ol>
 );
 
 const PaletteBoys = () => (
@@ -56,6 +107,23 @@ const PaletteBoys = () => (
     <Color value="#FBFBFA" />
     <Color value="#A3A3A3" />
   </div>
+);
+
+const Color = ({ value }) => (
+  <motion.svg
+    height="100"
+    width="100"
+    className={`transition-all duration-700 ease-in-out transform scale-75 lg:scale-90 cursor-pointer hover:scale-100`}
+    variants={item}
+  >
+    <circle
+      cx="50"
+      cy="50"
+      r="40"
+      fill={value}
+      stroke={`${value === '#FBFBFA' ? '#333745' : '#FFFFFF'}`}
+    />
+  </motion.svg>
 );
 
 function Palette() {
@@ -73,7 +141,7 @@ function Palette() {
                 <GenderFemale
                   size={24}
                   className={`${
-                    params.gender == 'feminine'
+                    params?.gender == 'feminine'
                       ? 'scale-100 text-[#333745]'
                       : 'scale-75 text-[#7E85A0]'
                   }
@@ -86,7 +154,7 @@ function Palette() {
                 <GenderMale
                   size={24}
                   className={`${
-                    params.gender == 'masculine'
+                    params?.gender == 'masculine'
                       ? 'scale-100 text-[#333745]'
                       : 'scale-75 text-[#7E85A0]'
                   }
@@ -100,7 +168,7 @@ function Palette() {
       <Link href="/">
         <a className="cursor-pointer hover:font-medium text-[#333745]">
           <div className="flex items-center justify-between space-x-2">
-            <ArrowLeft size={24} color="#3e3e3d" />
+            <ArrowLeft size={20} color="#3e3e3d" />
           </div>
         </a>
       </Link>
@@ -111,25 +179,9 @@ function Palette() {
 
 const Logo = () => <div className="text-xl font-semibold">Shahu & Fazo</div>;
 
-const Color = ({ value }) => (
-  <svg
-    height="100"
-    width="100"
-    className={`transition-all duration-700 ease-in-out transform scale-75 lg:scale-90 cursor-pointer hover:scale-100`}
-  >
-    <circle
-      cx="50"
-      cy="50"
-      r="40"
-      fill={value}
-      stroke={`${value === '#FBFBFA' ? '#333745' : '#FFFFFF'}`}
-    />
-  </svg>
-);
-
-const Footer = () => (
+const Footer = memo(() => (
   <div className="flex flex-col items-center space-y-2 text-[#333745]">
     <Logo />
     <h6 className="text-md text-[#333745]">04/11/2022</h6>
   </div>
-);
+));
