@@ -1,6 +1,6 @@
-import { useState, useMemo } from 'react';
-import { Link, Route } from 'wouter';
+import { Link, Route, useRoute } from 'wouter';
 import DiamondArrow from './DiamondArrow';
+import { GenderFemale, GenderMale } from 'phosphor-react';
 
 export default function Surface() {
   // const [showPalette, setShowPalette] = useState(false);
@@ -13,8 +13,8 @@ export default function Surface() {
         <Countdown onNavigate={() => setShowPalette(true)} />
       )} */}
       <Route path="/" component={Countdown} />
-      <Route path="/palettes/girls" component={Palette} />
-      <Route path="/palettes/boys" component={Palette} />
+      <Route path="/palettes/feminine" component={Palette} />
+      <Route path="/palettes/masculine" component={Palette} />
     </div>
   );
 }
@@ -32,7 +32,7 @@ function Countdown({ onNavigate }) {
         <h1 className="text-9xl text-[#333745]">{daysTillNov4()}</h1>
         <h5 className="text-6xl text-[#333745]">Days</h5>
       </div>
-      <Link href="/palettes/girls">
+      <Link href="/palettes/feminine">
         <a
           className="cursor-pointer hover:font-medium animate-pulse text-[#333745]"
           // onClick={onNavigate}
@@ -77,20 +77,31 @@ function Palette({ onNavigate }) {
   // useEffect(() => {
   //   setSelected(palettes[0]);
   // }, [selected]);
+  const [match, params] = useRoute('/palettes/:gender');
 
   return (
     <div className="flex flex-col items-center justify-between flex-1 min-w-full py-0 space-y-8 lg:py-6">
       <div className="flex flex-col items-center flex-1 space-y-2">
         {/* {selected.component} */}
-        <Route path="/palettes/girls" component={PaletteGirls} />
-        <Route path="/palettes/boys" component={PaletteBoys} />
+        <Route path="/palettes/feminine" component={PaletteGirls} />
+        <Route path="/palettes/masculine" component={PaletteBoys} />
         <div className="flex-col items-center space-y-2">
-          <div className="flex justify-center space-x-4">
-            <Link href="/palettes/girls">
-              <a className="link">Girls</a>
+          <div className="flex justify-between space-x-6">
+            <Link href="/palettes/feminine">
+              <a className="link">
+                <GenderFemale
+                  size={24}
+                  color={params.gender == 'feminine' ? '#333745' : '#7E85A0'}
+                />
+              </a>
             </Link>
-            <Link href="/palettes/boys">
-              <a className="link">Boys</a>
+            <Link href="/palettes/masculine">
+              <a className="link">
+                <GenderMale
+                  size={24}
+                  color={params.gender == 'masculine' ? '#333745' : '#7E85A0'}
+                />
+              </a>
             </Link>
           </div>
         </div>
