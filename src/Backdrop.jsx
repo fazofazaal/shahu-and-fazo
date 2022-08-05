@@ -2,7 +2,6 @@ import { Environment } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { DepthOfField, EffectComposer } from '@react-three/postprocessing';
 import { Suspense } from 'react';
-import Banana from './Banana';
 import Flower from './Flower';
 
 export default function Backdrop({ count = 18, depth = 80 }) {

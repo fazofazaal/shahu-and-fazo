@@ -1,17 +1,14 @@
 import { Link, Route, useRoute } from 'wouter';
-import DiamondArrow from './DiamondArrow';
-import { GenderFemale, GenderMale, ArrowLeft } from 'phosphor-react';
+import {
+  GenderFemale,
+  ArrowRight,
+  GenderMale,
+  ArrowLeft,
+} from 'phosphor-react';
 
 export default function Surface() {
-  // const [showPalette, setShowPalette] = useState(false);
-
   return (
     <div className="absolute z-10 flex flex-col items-center justify-between min-w-full min-h-full px-12 py-8 md:py-36 lg:py-16 bg-[#C1CDC3] bg-opacity-0 bg-blend-color backdrop-filter font-galins">
-      {/* {showPalette ? (
-        <Palette onNavigate={() => setShowPalette(false)} />
-      ) : (
-        <Countdown onNavigate={() => setShowPalette(true)} />
-      )} */}
       <Route path="/" component={Countdown} />
       <Route path="/palettes/feminine" component={Palette} />
       <Route path="/palettes/masculine" component={Palette} />
@@ -33,13 +30,10 @@ function Countdown({ onNavigate }) {
         <h5 className="text-6xl text-[#333745]">Days</h5>
       </div>
       <Link href="/palettes/feminine">
-        <a
-          className="cursor-pointer hover:font-medium animate-pulse text-[#333745]"
-          // onClick={onNavigate}
-        >
+        <a className="cursor-pointer hover:font-medium animate-pulse text-[#333745]">
           <div className="flex items-center justify-between space-x-2">
             <span>View Color Palette</span>
-            <DiamondArrow />
+            <ArrowRight size={24} color="#3e3e3d" />
           </div>
         </a>
       </Link>
@@ -64,25 +58,12 @@ const PaletteBoys = () => (
   </div>
 );
 
-function Palette({ onNavigate }) {
-  // use memo return selected tags
-
-  // const palette = useMemo(() => [
-  //   { name: 'GIRLS', component: <PaletteGirls /> },
-  //   { name: 'BOYS', component: <PaletteBoys /> },
-  // ]);
-
-  // const [selected, setSetelected] = useState();
-
-  // useEffect(() => {
-  //   setSelected(palettes[0]);
-  // }, [selected]);
+function Palette() {
   const [_, params] = useRoute('/palettes/:gender');
 
   return (
     <div className="flex flex-col items-center justify-between flex-1 min-w-full py-0 space-y-8 lg:py-6">
       <div className="flex flex-col items-center flex-1 space-y-2">
-        {/* {selected.component} */}
         <Route path="/palettes/feminine" component={PaletteGirls} />
         <Route path="/palettes/masculine" component={PaletteBoys} />
         <div className="flex-col items-center space-y-2">
@@ -90,8 +71,7 @@ function Palette({ onNavigate }) {
             <Link href="/palettes/feminine">
               <a className="link">
                 <GenderFemale
-                  size={/* params.gender == 'feminine' ? 24 : 20 */ 24}
-                  // color={params.gender == 'feminine' ? '#333745' : '#7E85A0'}
+                  size={24}
                   className={`${
                     params.gender == 'feminine'
                       ? 'scale-100 text-[#333745]'
@@ -104,8 +84,7 @@ function Palette({ onNavigate }) {
             <Link href="/palettes/masculine">
               <a className="link">
                 <GenderMale
-                  size={/* params.gender == 'masculine' ? 24 : 20 */ 24}
-                  // color={params.gender == 'masculine' ? '#333745' : '#7E85A0'}
+                  size={24}
                   className={`${
                     params.gender == 'masculine'
                       ? 'scale-100 text-[#333745]'
@@ -119,15 +98,8 @@ function Palette({ onNavigate }) {
         </div>
       </div>
       <Link href="/">
-        <a
-          // onClick={onNavigate}
-          className="cursor-pointer hover:font-medium text-[#333745]"
-        >
+        <a className="cursor-pointer hover:font-medium text-[#333745]">
           <div className="flex items-center justify-between space-x-2">
-            {/* <span className="-rotate-180">
-              <DiamondArrow />
-            </span> */}
-            {/* <span>Back</span> */}
             <ArrowLeft size={24} color="#3e3e3d" />
           </div>
         </a>
