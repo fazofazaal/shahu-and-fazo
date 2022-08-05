@@ -103,10 +103,16 @@ const PaletteGirls = () => (
 );
 
 const PaletteBoys = () => (
-  <div className="flex flex-col items-center justify-center flex-1 space-y-0 lg:space-y-2">
+  <motion.ol
+    variants={container}
+    initial="hidden"
+    animate="show"
+    exit="exit"
+    className="flex flex-col items-center justify-center flex-1 space-y-0 lg:space-y-2"
+  >
     <Color value="#FBFBFA" />
     <Color value="#A3A3A3" />
-  </div>
+  </motion.ol>
 );
 
 const Color = ({ value }) => (
