@@ -16,7 +16,7 @@ export default function Surface() {
   );
 }
 
-function Countdown({ onNavigate }) {
+function Countdown() {
   const daysTillNov4 = () => {
     const today = new Date();
     const nov4 = new Date(today.getFullYear(), 10, 4);
