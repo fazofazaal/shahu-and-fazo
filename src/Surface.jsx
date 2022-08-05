@@ -1,6 +1,6 @@
 import { Link, Route, useRoute } from 'wouter';
 import DiamondArrow from './DiamondArrow';
-import { GenderFemale, GenderMale } from 'phosphor-react';
+import { GenderFemale, GenderMale, ArrowLeft } from 'phosphor-react';
 
 export default function Surface() {
   // const [showPalette, setShowPalette] = useState(false);
@@ -77,7 +77,7 @@ function Palette({ onNavigate }) {
   // useEffect(() => {
   //   setSelected(palettes[0]);
   // }, [selected]);
-  const [match, params] = useRoute('/palettes/:gender');
+  const [_, params] = useRoute('/palettes/:gender');
 
   return (
     <div className="flex flex-col items-center justify-between flex-1 min-w-full py-0 space-y-8 lg:py-6">
@@ -90,16 +90,28 @@ function Palette({ onNavigate }) {
             <Link href="/palettes/feminine">
               <a className="link">
                 <GenderFemale
-                  size={24}
-                  color={params.gender == 'feminine' ? '#333745' : '#7E85A0'}
+                  size={/* params.gender == 'feminine' ? 24 : 20 */ 24}
+                  // color={params.gender == 'feminine' ? '#333745' : '#7E85A0'}
+                  className={`${
+                    params.gender == 'feminine'
+                      ? 'scale-100 text-[#333745]'
+                      : 'scale-75 text-[#7E85A0]'
+                  }
+                   transition-all ease-out duration-300`}
                 />
               </a>
             </Link>
             <Link href="/palettes/masculine">
               <a className="link">
                 <GenderMale
-                  size={24}
-                  color={params.gender == 'masculine' ? '#333745' : '#7E85A0'}
+                  size={/* params.gender == 'masculine' ? 24 : 20 */ 24}
+                  // color={params.gender == 'masculine' ? '#333745' : '#7E85A0'}
+                  className={`${
+                    params.gender == 'masculine'
+                      ? 'scale-100 text-[#333745]'
+                      : 'scale-75 text-[#7E85A0]'
+                  }
+                   transition-all ease-in-out duration-500`}
                 />
               </a>
             </Link>
@@ -109,13 +121,14 @@ function Palette({ onNavigate }) {
       <Link href="/">
         <a
           // onClick={onNavigate}
-          className="cursor-pointer hover:font-medium animate-pulse text-[#333745]"
+          className="cursor-pointer hover:font-medium text-[#333745]"
         >
           <div className="flex items-center justify-between space-x-2">
-            <span className="-rotate-180">
+            {/* <span className="-rotate-180">
               <DiamondArrow />
-            </span>
-            <span>Back</span>
+            </span> */}
+            {/* <span>Back</span> */}
+            <ArrowLeft size={24} color="#3e3e3d" />
           </div>
         </a>
       </Link>
