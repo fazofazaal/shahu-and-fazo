@@ -6,7 +6,7 @@ export default function Surface() {
   // const [showPalette, setShowPalette] = useState(false);
 
   return (
-    <div className="absolute z-10 flex flex-col items-center justify-between min-w-full min-h-screen px-12 py-8 md:py-36 lg:py-16 bg-[#C1CDC3] bg-opacity-0 bg-blend-color backdrop-filter font-galins">
+    <div className="absolute z-10 flex flex-col items-center justify-between min-w-full min-h-full px-12 py-8 md:py-36 lg:py-16 bg-[#C1CDC3] bg-opacity-0 bg-blend-color backdrop-filter font-galins">
       {/* {showPalette ? (
         <Palette onNavigate={() => setShowPalette(false)} />
       ) : (
