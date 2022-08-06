@@ -29,18 +29,13 @@ export default function Surface() {
   return (
     <AnimatePresence initial={false}>
       <motion.div
-        className="absolute z-10 flex flex-col items-center justify-between min-w-full min-h-full px-12 py-8 md:py-36 lg:py-16 bg-[#C1CDC3] bg-opacity-0 bg-blend-color backdrop-filter font-galins"
+        className="absolute z-10 flex flex-col items-center justify-between min-w-full min-h-full px-12 py-8 md:py-16 lg:py-16 bg-[#C1CDC3] bg-opacity-0 bg-blend-color backdrop-filter font-galins"
         key={location}
         {...AnimationSettings}
       >
         <Route />
       </motion.div>
     </AnimatePresence>
-    // <div className="absolute z-10 flex flex-col items-center justify-between min-w-full min-h-full px-12 py-8 md:py-36 lg:py-16 bg-[#C1CDC3] bg-opacity-0 bg-blend-color backdrop-filter font-galins">
-    //   <Route path="/" component={Countdown} />
-    //   <Route path="/palettes/feminine" component={Palette} />
-    //   <Route path="/palettes/masculine" component={Palette} />
-    // </div>
   );
 }
 
@@ -117,9 +112,14 @@ const PaletteBoys = () => (
 
 const Color = ({ value }) => (
   <motion.svg
+    whileHover={{
+      scale: 1.2,
+      transition: { duration: 1 },
+    }}
+    whileTap={{ scale: 0.9 }}
     height="100"
     width="100"
-    className={`transition-all duration-700 ease-in-out transform scale-75 lg:scale-90 cursor-pointer hover:scale-100`}
+    className={`transform scale-75 lg:scale-90 cursor-pointer`}
     variants={item}
   >
     <circle
@@ -150,8 +150,7 @@ function Palette() {
                     params?.gender == 'feminine'
                       ? 'scale-100 text-[#333745]'
                       : 'scale-75 text-[#7E85A0]'
-                  }
-                   transition-all ease-out duration-300`}
+                  } transition-all ease-out duration-300`}
                 />
               </a>
             </Link>
@@ -163,8 +162,7 @@ function Palette() {
                     params?.gender == 'masculine'
                       ? 'scale-100 text-[#333745]'
                       : 'scale-75 text-[#7E85A0]'
-                  }
-                   transition-all ease-in-out duration-500`}
+                  } transition-all ease-in-out duration-500`}
                 />
               </a>
             </Link>
