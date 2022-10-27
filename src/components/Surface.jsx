@@ -1,12 +1,15 @@
-import { Link, Route, useRoute, useLocation, useRouter } from 'wouter';
+import { AnimatePresence, motion } from 'framer-motion';
 import {
-  GenderFemale,
-  ArrowRight,
-  GenderMale,
   ArrowLeft,
+  ArrowRight,
+  GenderFemale,
+  GenderMale,
 } from 'phosphor-react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { memo } from 'react';
+import { Link, Route, useLocation, useRoute, useRouter } from 'wouter';
+import Drawing from './Drawing';
+import Logo from './Logo';
+import Opening from './Opening';
 
 const AnimationSettings = {
   transition: { duration: 1 },
@@ -16,7 +19,7 @@ const AnimationSettings = {
 };
 
 const routes = {
-  '/': Countdown,
+  '/': Invitation,
   '/palettes/feminine': Palette,
   '/palettes/masculine': Palette,
 };
@@ -27,18 +30,50 @@ export default function Surface() {
   const Route = routes[location];
 
   return (
-    <AnimatePresence initial={false}>
-      <motion.div
-        className="absolute z-10 flex flex-col items-center justify-between min-w-full min-h-full px-12 py-8 md:py-16 lg:py-16 bg-[#C1CDC3] bg-opacity-0 bg-blend-color backdrop-filter font-galins"
-        key={location}
-        {...AnimationSettings}
-      >
-        <Route />
-      </motion.div>
-    </AnimatePresence>
+    <Opening />
+    // <AnimatePresence initial={true} exitBeforeEnter>
+    //   <motion.div
+    //     className="absolute z-10 flex flex-col items-center justify-between min-w-full min-h-full px-12 py-8 md:py-16 lg:py-16 bg-[#C1CDC3] bg-opacity-0 bg-blend-color backdrop-filter font-galins"
+    //     key={location}
+    //     {...AnimationSettings}
+    //   >
+    //     <Route />
+    //   </motion.div>
+    // </AnimatePresence>
   );
 }
 
+function Invitation() {
+  const daysTillNov4 = () => {
+    const today = new Date();
+    const nov4 = new Date(today.getFullYear(), 10, 4);
+    const diff = nov4 - today;
+    return Math.ceil(diff / (1000 * 60 * 60 * 24));
+  };
+
+  return (
+    <div className="flex flex-col items-center justify-center flex-1 min-w-full min-h-full py-0 text-xl text-center align-middle lg:py-6 gap-y-8">
+      <p>Join us to celebrate our love...</p>
+      <p>
+        on Friday 4th of November <br /> <br /> 16:45 - 18:45 <br /> at
+        Farukolhufushi.
+      </p>
+      <p>
+        See you at our wedding
+        {daysTillNov4() > 0 ? ` in ${daysTillNov4()} days` : ''}.
+      </p>
+      <Link href="/palettes/feminine">
+        <a className="cursor-pointer hover:font-medium animate-pulse text-[#333745]">
+          <div className="flex items-center justify-between space-x-2">
+            <span>Color Palette</span>
+            <ArrowRight size={20} color="#3e3e3d" />
+          </div>
+        </a>
+      </Link>
+      <Footer />
+    </div>
+  );
+}
 function Countdown() {
   const daysTillNov4 = () => {
     const today = new Date();
@@ -180,8 +215,6 @@ function Palette() {
     </div>
   );
 }
-
-const Logo = () => <div className="text-xl font-semibold">Shahu & Fazo</div>;
 
 const Footer = memo(() => (
   <div className="flex flex-col items-center space-y-2 text-[#333745]">
