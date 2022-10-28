@@ -45,7 +45,7 @@ export default function Surface() {
       initial={{ backgroundColor: 'rgba(251, 251, 250, 1)' }}
       animate={{ background: 'rgba(251, 251, 250, 0)' }}
       transition={{ duration: 4, delay: 8 }}
-      className="absolute z-10 flex flex-col items-center justify-between min-w-full min-h-full py-14 font-galins text-[#333745]"
+      className="absolute z-10 flex flex-col items-center justify-between min-w-full min-h-full py-8 lg:py-14 font-galins text-[#333745]"
     >
       <AnimatePresence exitBeforeEnter>
         <motion.div

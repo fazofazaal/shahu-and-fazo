@@ -19,8 +19,8 @@ export default function PaletteFeminine() {
   const [_, params] = useRoute('/palettes/:gender');
 
   return (
-    <div className="flex flex-col items-center justify-between flex-1 min-w-full py-0 space-y-8 lg:py-6">
-      <div className="flex flex-col items-center flex-1 space-y-10">
+    <div className="flex flex-col items-center justify-between flex-1 min-w-full py-0 space-y-6 lg:space-y-8 lg:py-6">
+      <div className="flex flex-col items-center flex-1 space-y-6 lg:space-y-10">
         <motion.ol
           variants={container}
           initial="hidden"
