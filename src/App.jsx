@@ -1,5 +1,6 @@
-import Backdrop from './Backdrop';
-import Surface from './Surface';
+import Backdrop from './components/Backdrop';
+import Surface from './components/Surface';
+import Opening from './components/Opening';
 
 export default function App() {
   return (
