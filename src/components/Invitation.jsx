@@ -35,7 +35,7 @@ export default function Invitation() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 5 }}
-        className="flex flex-col gap-y-6"
+        className="flex flex-col gap-y-4"
       >
         <Link href="/palettes/feminine">
           <a className="cursor-pointer hover:font-medium text-[#333745]">
