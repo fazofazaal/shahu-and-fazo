@@ -38,5 +38,11 @@ export default function useTimeRemaining() {
     return () => clearInterval(interval);
   }, []);
 
-  return timeRemaining;
+  return [
+    timeRemaining.days,
+    timeRemaining.hours,
+    timeRemaining.minutes,
+    timeRemaining.seconds,
+    timeRemaining.hasPassed,
+  ];
 }

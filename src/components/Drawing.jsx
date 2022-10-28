@@ -11,6 +11,7 @@ const draw = {
     pathLength: 1,
     transition: {
       duration: 10,
+      ease: 'easeInOut',
     },
   },
 };
