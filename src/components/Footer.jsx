@@ -16,7 +16,10 @@ export default function Footer() {
       >
         <Logo />
         {!hasPassed && !match && (
-          <p className="text-sm text-center">Just {days} days to go!</p>
+          <p className="text-sm text-center">
+            Just {days} {days > 1 ? 'days' : 'day'} and {hours}{' '}
+            {hours > 1 ? 'hours' : 'hour'} to go!
+          </p>
         )}
       </motion.div>
     </Link>
